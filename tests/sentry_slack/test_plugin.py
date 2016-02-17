@@ -9,18 +9,18 @@ from sentry.testutils import TestCase
 from sentry.utils import json
 from urlparse import parse_qs
 
-from sentry_slack.plugin import SlackPlugin
+from sentry_zulip.plugin import ZulipPlugin
 
 
-class SlackPluginTest(TestCase):
+class ZulipPluginTest(TestCase):
     @fixture
     def plugin(self):
-        return SlackPlugin()
+        return ZulipPlugin()
 
     @responses.activate
     def test_simple_notification(self):
-        responses.add('POST', 'http://example.com/slack')
-        self.plugin.set_option('webhook', 'http://example.com/slack', self.project)
+        responses.add('POST', 'http://example.com/zulip')
+        self.plugin.set_option('webhook', 'http://example.com/zulip', self.project)
 
         group = self.create_group(message='Hello world', culprit='foo.bar')
         event = self.create_event(group=group, message='Hello world')
@@ -58,4 +58,3 @@ class SlackPluginTest(TestCase):
                 },
             ],
         }
-

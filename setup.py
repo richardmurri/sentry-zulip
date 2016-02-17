@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-sentry-slack
+sentry-zulip
 ============
 
 An extension for `Sentry <https://getsentry.com>`_ which posts notifications
-to `Slack <https://slack.com>`_.
+to `Zulip <https://www.zulip.org>`_.
 
 :copyright: (c) 2015 by the Sentry Team, see AUTHORS for more details.
 :license: BSD, see LICENSE for more details.
@@ -23,12 +23,12 @@ tests_require = [
 ]
 
 setup(
-    name='sentry-slack',
+    name='sentry-zulip',
     version='0.6.0.dev0',
     author='Matt Robenolt',
     author_email='matt@ydekproductons.com',
-    url='https://github.com/getsentry/sentry-slack',
-    description='A Sentry extension which posts notifications to Slack (https://slack.com/).',
+    # url='https://github.com/getsentry/sentry-zulip',
+    description='A Sentry extension which posts notifications to Zulip (https://www.zulip.org/).',
     long_description=open('README.rst').read(),
     license='BSD',
     package_dir={'': 'src'},
@@ -41,10 +41,10 @@ setup(
     include_package_data=True,
     entry_points={
         'sentry.apps': [
-            'slack = sentry_slack',
+            'zulip = sentry_zulip',
         ],
         'sentry.plugins': [
-            'slack = sentry_slack.plugin:SlackPlugin',
+            'zulip = sentry_zulip.plugin:ZulipPlugin',
         ]
     },
     classifiers=[

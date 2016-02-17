@@ -1,12 +1,12 @@
 """
-sentry_slack.plugin
+sentry_zulip.plugin
 ~~~~~~~~~~~~~~~~~~~
 
 :copyright: (c) 2015 by Sentry Team, see AUTHORS for more details.
 :license: BSD, see LICENSE for more details.
 """
 import operator
-import sentry_slack
+import sentry_zulip
 
 from django import forms
 from django.core.urlresolvers import reverse
@@ -34,9 +34,9 @@ def get_project_full_name(project):
     return project.name
 
 
-class SlackOptionsForm(notify.NotificationConfigurationForm):
+class ZulipOptionsForm(notify.NotificationConfigurationForm):
     webhook = forms.URLField(
-        help_text='Your custom Slack webhook URL',
+        help_text='Your custom Zulip webhook URL',
         widget=forms.URLInput(attrs={'class': 'span8'})
     )
     username = forms.CharField(
@@ -50,7 +50,7 @@ class SlackOptionsForm(notify.NotificationConfigurationForm):
         label='Icon URL',
         help_text='The url of the icon to appear beside your bot (32px png), '
                   'leave empty for none.<br />You may use '
-                  'http://myovchev.github.io/sentry-slack/images/logo32.png',
+                  'http://myovchev.github.io/sentry-zulip/images/logo32.png',
         widget=forms.URLInput(attrs={'class': 'span8'}),
         required=False
     )
@@ -81,20 +81,20 @@ class SlackOptionsForm(notify.NotificationConfigurationForm):
     )
 
 
-class SlackPlugin(notify.NotificationPlugin):
+class ZulipPlugin(notify.NotificationPlugin):
     author = 'Sentry Team'
     author_url = 'https://github.com/getsentry'
     resource_links = (
-        ('Bug Tracker', 'https://github.com/getsentry/sentry-slack/issues'),
-        ('Source', 'https://github.com/getsentry/sentry-slack'),
+        ('Bug Tracker', 'https://github.com/getsentry/sentry-zulip/issues'),
+        ('Source', 'https://github.com/getsentry/sentry-zulip'),
     )
 
-    title = 'Slack'
-    slug = 'slack'
-    description = 'Post notifications to a Slack channel.'
-    conf_key = 'slack'
-    version = sentry_slack.VERSION
-    project_conf_form = SlackOptionsForm
+    title = 'Zulip'
+    slug = 'zulip'
+    description = 'Post notifications to a Zulip channel.'
+    conf_key = 'zulip'
+    version = sentry_zulip.VERSION
+    project_conf_form = ZulipOptionsForm
 
     def is_configured(self, project):
         return all((self.get_option(k, project) for k in ('webhook',)))
@@ -179,7 +179,7 @@ class SlackPlugin(notify.NotificationPlugin):
                     group.organization.slug, project.slug, rule.id
                 ])
                 # Make sure it's an absolute uri since we're sending this
-                # outside of Sentry into Slack
+                # outside of Sentry into Zulip
                 rule_link = absolute_uri(rule_link)
                 rules.append((rule_link, rule.label.encode('utf-8')))
 
