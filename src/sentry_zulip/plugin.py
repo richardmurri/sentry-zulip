@@ -96,7 +96,7 @@ class ZulipPlugin(notify.NotificationPlugin):
         apiurl = apiurl.strip(' ')
 
         session = build_session()
-        return session.request(method='GET',
+        return session.request(method='POST',
                                url=apiurl,
                                data=values,
                                auth=(username, apikey))

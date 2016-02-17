@@ -19,7 +19,7 @@ class ZulipPluginTest(TestCase):
 
     @responses.activate
     def test_simple_notification(self):
-        responses.add('GET', 'http://example.com/zulip')
+        responses.add('POST', 'http://example.com/zulip')
         self.plugin.set_option('apiurl', 'http://example.com/zulip', self.project)
         self.plugin.set_option('username', 'bot@example.com', self.project)
         self.plugin.set_option('apikey', 'testkey', self.project)
