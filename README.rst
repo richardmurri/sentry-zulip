@@ -3,7 +3,6 @@ sentry-zulip
 
 An extension for `Sentry <https://getsentry.com>`_ which posts notifications to a `Zulip <https://www.zulip.org>`_ channel.
 
-.. image:: https://i.imgur.com/MFsjVmB.png
 
 Install
 -------
